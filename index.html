@@ -1,1 +1,1100 @@
-its comming
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vignesh Sunnapu - Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: white;
+            color: #111;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #111;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #111;
+            text-decoration: none;
+            font-weight: 400;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.6;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #111;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            width: 200px;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 3000;
+            padding: 0;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu .nav-links {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu .nav-links li {
+            list-style: none;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-menu .nav-links li:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu .nav-links a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: #111;
+            text-decoration: none;
+            font-size: 1.1rem;
+            background: none;
+        }
+
+        .mobile-menu .nav-links a:hover {
+            background: #f5f5f5;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: 1px solid #111;
+            background: transparent;
+            color: #111;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background: #111;
+            color: white;
+        }
+
+        .btn-primary {
+            background: #111;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: #111;
+        }
+
+        /* Section */
+        section {
+            padding: 5rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            text-align: center;
+            letter-spacing: -0.02em;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 300;
+            color: #111;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .skill-category h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            padding: 0.3rem 0.8rem;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            font-size: 0.9rem;
+            color: #666;
+            background: transparent;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            background: rgba(0, 0, 0, 0.02);
+            transform: translateY(-2px);
+        }
+
+        .project-header {
+            margin-bottom: 1rem;
+        }
+
+        .project-header h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-status {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tag {
+            padding: 0.2rem 0.6rem;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #111;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-link:hover {
+            opacity: 0.6;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid #111;
+            color: #111;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: #111;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 0;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Skills Tabs */
+        .skills-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            background: transparent;
+            color: #666;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: #111;
+            color: white;
+            border-color: #111;
+        }
+
+        .tab-btn:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .tab-btn.active:hover {
+            background: #111;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .close:hover {
+            color: #111;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #111;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            font-size: 1rem;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #111;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            color: #111;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+
+            .stat-item {
+                padding: 1rem;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-links {
+                flex-direction: column;
+            }
+
+            .skills-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav style="position: relative;">
+            <div class="logo">Vignesh Sunnapu</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <div class="mobile-menu" id="mobileMenu">
+                <ul class="nav-links">
+                    <li><a href="#home" onclick="toggleMobileMenu()">Home</a></li>
+                    <li><a href="#about" onclick="toggleMobileMenu()">About</a></li>
+                    <li><a href="#skills" onclick="toggleMobileMenu()">Skills</a></li>
+                    <li><a href="#projects" onclick="toggleMobileMenu()">Projects</a></li>
+                    <li><a href="#contact" onclick="toggleMobileMenu()">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Vignesh Sunnapu</h1>
+            <p>Self-taught Developer • Problem Solver • AI Enthusiast</p>
+            <div style="margin-top: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+                <p style="color: #666; font-size: 1rem; line-height: 1.5;">
+                    3+ years building real projects that solve actual problems. Ready to tackle your toughest challenges with innovative solutions and a passion for excellence.
+                </p>
+            </div>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="https://drive.google.com/file/d/YOUR_RESUME_FILE_ID/view?usp=sharing" class="btn" target="_blank">
+                    <span>↓</span> Download Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <div class="about-grid">
+                <div class="about-text fade-in">
+                    <p>Self-taught software developer with 3+ years of hands-on experience building real projects that solve actual problems.</p>
+                    <p>I leverage AI tools to amplify my capabilities and work across multiple tech stacks. Love taking on challenges that others find impossible.</p>
+                    <p>Currently pursuing B.Tech in Computer Science, seeking opportunities with companies that value innovation and problem-solving.</p>
+                </div>
+                <div class="stats fade-in">
+                    <div class="stat-item">
+                        <div class="stat-number">3+</div>
+                        <div class="stat-label">Years Building</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">7.93</div>
+                        <div class="stat-label">CGPA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Tech Stack</h2>
+            
+            <!-- Skills Tabs -->
+            <div class="skills-tabs">
+                <button class="tab-btn active" onclick="showTab('skills')">Core Skills</button>
+                <button class="tab-btn" onclick="showTab('techstack')">Tech Stack Used</button>
+            </div>
+
+            <!-- Skills Tab Content -->
+            <div id="skills-tab" class="tab-content active">
+                <div class="skills-grid">
+                    <div class="skill-category fade-in">
+                        <h3>Programming & Development</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">PHP</span>
+                            <span class="skill-tag">TypeScript</span>
+                        </div>
+                    </div>
+                    <div class="skill-category fade-in">
+                        <h3>Web Development</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">React.js</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Express.js</span>
+                            <span class="skill-tag">Bootstrap</span>
+                            <span class="skill-tag">Tailwind CSS</span>
+                        </div>
+                    </div>
+                    <div class="skill-category fade-in">
+                        <h3>AI & Automation</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Google Gemini</span>
+                            <span class="skill-tag">OpenCV</span>
+                            <span class="skill-tag">AI APIs</span>
+                            <span class="skill-tag">Computer Vision</span>
+                            <span class="skill-tag">Telegram Bots</span>
+                        </div>
+                    </div>
+                    <div class="skill-category fade-in">
+                        <h3>Real-time Projects</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Problem Solving</span>
+                            <span class="skill-tag">AI Integration</span>
+                            <span class="skill-tag">Scalable Solutions</span>
+                            <span class="skill-tag">Cost Optimization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech Stack Tab Content -->
+            <div id="techstack-tab" class="tab-content">
+                <div class="skills-grid">
+                    <div class="skill-category fade-in">
+                        <h3>Databases & Storage</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">Firebase</span>
+                            <span class="skill-tag">Supabase</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                        </div>
+                    </div>
+                    <div class="skill-category fade-in">
+                        <h3>Cloud & Hosting</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Vercel</span>
+                            <span class="skill-tag">Heroku</span>
+                            <span class="skill-tag">Railway</span>
+                            <span class="skill-tag">Google Cloud</span>
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Cloudflare</span>
+                            <span class="skill-tag">Koyeb</span>
+                            <span class="skill-tag">InfinityFree</span>
+                        </div>
+                    </div>
+                    <div class="skill-category fade-in">
+                        <h3>Web3 & Blockchain</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Solana</span>
+                            <span class="skill-tag">Phantom Wallet</span>
+                            <span class="skill-tag">Smart Contracts</span>
+                            <span class="skill-tag">Web3.js</span>
+                            <span class="skill-tag">Ether.js</span>
+                            <span class="skill-tag">Tron</span>
+                            <span class="skill-tag">USDT</span>
+                        </div>
+                    </div>
+                    <div class="skill-category fade-in">
+                        <h3>Development Tools</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">VS Code</span>
+                            <span class="skill-tag">Git/GitHub</span>
+                            <span class="skill-tag">Android Studio</span>
+                            <span class="skill-tag">Telegram Cloud</span>
+                            <span class="skill-tag">No-code Tools</span>
+                        </div>
+                    </div>
+                    <div class="skill-category fade-in">
+                        <h3>Python Libraries</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">NumPy</span>
+                            <span class="skill-tag">Pandas</span>
+                            <span class="skill-tag">Selenium</span>
+                            <span class="skill-tag">Pyautogui</span>
+                            <span class="skill-tag">Requests</span>
+                        </div>
+                    </div>
+                    <div class="skill-category fade-in">
+                        <h3>SEO & Analytics</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Google Analytics</span>
+                            <span class="skill-tag">Site Crawling</span>
+                            <span class="skill-tag">Ranking Optimization</span>
+                            <span class="skill-tag">Performance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <h3>Movie Streaming Platform</h3>
+                        <div class="project-status">Live • 24/7 Uptime</div>
+                    </div>
+                    <div class="project-description">
+                        Built a cost-effective 24/7 movie streaming platform using Telegram bots and cloud optimization. Solved unlimited storage challenges without expensive infrastructure.
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Telegram API</span>
+                        <span class="project-tag">Vercel</span>
+                        <span class="project-tag">Cloud Storage</span>
+                    </div>
+                    <a href="https://kanubomma.free.nf" class="project-link" target="_blank">
+                        <span>→</span> View Project
+                    </a>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <h3>Code & File Sharing</h3>
+                        <div class="project-status">Live • Widely Used</div>
+                    </div>
+                    <div class="project-description">
+                        Alternative to codeshare.io with file sharing. Enables instant sharing of code, PDFs, and documents with real-time updates. No login required.
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">Real-time</span>
+                        <span class="project-tag">File Sharing</span>
+                        <span class="project-tag">Web Platform</span>
+                    </div>
+                    <a href="https://dsshare.fwh.is" class="project-link" target="_blank">
+                        <span>→</span> View Project
+                    </a>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <h3>Crypto Messaging Platform</h3>
+                        <div class="project-status">Live • Prototype Complete</div>
+                    </div>
+                    <div class="project-description">
+                        Secure messaging platform for Solana crypto traders using Phantom Wallet addresses. Maintains anonymity while tracking transactions.
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Solana</span>
+                        <span class="project-tag">Phantom Wallet</span>
+                        <span class="project-tag">Web3</span>
+                        <span class="project-tag">Blockchain</span>
+                    </div>
+                    <a href="https://vignesh.free.nf" class="project-link" target="_blank">
+                        <span>→</span> View Project
+                    </a>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <h3>CryptoPay - Easy Crypto Payments</h3>
+                        <div class="project-status">In Development</div>
+                    </div>
+                    <div class="project-description">
+                        User-friendly crypto payment platform enabling easy send/receive through simple QR scanners. Manages public/private keys, databases, and transactions automatically. Currently supports Tron and USDT, expanding to all coins and networks.
+                    </div>
+                    <div class="project-tags">
+                        <span class="project-tag">Tron</span>
+                        <span class="project-tag">USDT</span>
+                        <span class="project-tag">Web3</span>
+                        <span class="project-tag">QR Scanner</span>
+                        <span class="project-tag">Blockchain</span>
+                    </div>
+                    <a href="https://drive.google.com/file/d/YOUR_DEMO_VIDEO_ID/view?usp=sharing" class="project-link" target="_blank">
+                        <span>▶</span> Watch Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <div class="contact-item">
+                        <div class="contact-icon">@</div>
+                        <div>
+                            <strong>Email</strong><br>
+                            vigneshbunny232@gmail.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon" style="padding:0; border:none; background:none;">
+                            <!-- Phone SVG Icon -->
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.2 2.2z" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <div>
+                            <strong>Phone</strong><br>
+                            +91 7036969948
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🎓</div>
+                        <div>
+                            <strong>Education</strong><br>
+                            B.Tech CSE & Data Science<br>
+                            Malla Reddy Engineering College
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <h3 style="margin-bottom: 1rem;">Let's work together</h3>
+                    <p style="color: #666; margin-bottom: 2rem;">
+                        Looking for opportunities with companies that value innovation and problem-solving. 
+                        Ready to tackle challenging projects and build scalable solutions.
+                    </p>
+                    <div class="contact-links">
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=vigneshbunny232@gmail.com" class="contact-link" target="_blank">
+                            <span>@</span> Email Me
+                        </a>
+                        <a href="https://wa.me/917036969948" class="contact-link" target="_blank">
+                            <span>💬</span> WhatsApp
+                        </a>
+                        <a href="https://linkedin.com/in/vignesh-sunnapu-907888336" class="contact-link" target="_blank">
+                            <span>in</span> LinkedIn
+                        </a>
+                        <a href="https://github.com/vigneshbunny" class="contact-link" target="_blank">
+                            <span>{ }</span> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="suggestions" style="background: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Suggestions Welcome</h2>
+            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+                <p style="color: #666; margin-bottom: 2rem;">
+                    Your honest feedback helps me improve. Please share your thoughts about my portfolio or any suggestions you might have.
+                </p>
+                <button class="btn btn-primary" onclick="openSuggestionForm()">
+                    <span>💡</span> Share Your Suggestion
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Suggestion Modal -->
+    <div id="suggestionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSuggestionForm()">&times;</span>
+            
+            <!-- Form -->
+            <div id="suggestionForm">
+                <h3>Share Your Suggestion</h3>
+                <form id="suggestionFormElement">
+                    <div class="form-group">
+                        <label for="name">Your Name (Optional)</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="suggestion">Your Suggestion</label>
+                        <textarea id="suggestion" name="suggestion" rows="6" placeholder="Share your honest feedback or suggestions..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Suggestion</button>
+                </form>
+            </div>
+
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message">
+                <div class="success-icon">✓</div>
+                <h3>Thank You!</h3>
+                <p>Your suggestion has been submitted successfully. Your feedback helps me improve and grow.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu functionality
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking outside
+        window.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            if (
+                mobileMenu.classList.contains('active') &&
+                !mobileMenu.contains(event.target) &&
+                !menuBtn.contains(event.target)
+            ) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Suggestion modal functions
+        function openSuggestionForm() {
+            document.getElementById('suggestionModal').style.display = 'block';
+            document.getElementById('suggestionForm').style.display = 'block';
+            document.getElementById('successMessage').classList.remove('show');
+        }
+
+        function closeSuggestionForm() {
+            document.getElementById('suggestionModal').style.display = 'none';
+            document.getElementById('suggestionFormElement').reset();
+        }
+
+        // Handle suggestion form submission
+        document.getElementById('suggestionFormElement').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value || 'Anonymous';
+            const suggestion = document.getElementById('suggestion').value;
+            
+            // Send suggestion via email using EmailJS or similar service
+            // For now, we'll create a mailto link that opens Gmail compose
+            const emailSubject = `Portfolio Suggestion from ${name}`;
+            const emailBody = `Name: ${name}\n\nSuggestion:\n${suggestion}`;
+            const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=vigneshbunny232@gmail.com&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            
+            // Open Gmail compose window
+            window.open(mailtoLink, '_blank');
+            
+            // Hide form and show success message
+            document.getElementById('suggestionForm').style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+            
+            // Auto close after 3 seconds
+            setTimeout(() => {
+                closeSuggestionForm();
+            }, 3000);
+            
+            // Log the suggestion (for development)
+            console.log('Suggestion from:', name);
+            console.log('Suggestion:', suggestion);
+        });
+    </script>
+</body>
+</html>
